@@ -1,10 +1,7 @@
 const Barber = require('../models/barberModel')
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
-// const sendToken = require('../utils/jwtToken');
 const ErrorHandler = require("../utils/errorHandler");
 const cloudinary = require("cloudinary")
-
-
 
 
 // Find All Barbers
@@ -59,33 +56,7 @@ exports.getBarbersUrl = catchAsyncErrors(async(req, res, next) => {
 
 })
 
-// Raza tera wala hai yai create barber
-// exports.createBarber = catchAsyncErrors(async(req, res, next) => {
-
-//     let imagePaths=[]
-
-//     if(typeof imagePaths)
-
-//     const { name, timings, experience, imagePath, worksAt, ratings, reviews } = req.body
-
-//     const barber = await Barber.create({
-//         name,
-//         timings,
-//         experience,
-//         imagePath,
-//         worksAt,
-//         ratings,
-//         reviews
-//     })
-//     res.status(200).json({
-//         success: true,
-//         barber
-//     })
-// })
-
-
 // Create Barber (Admin) Shayan
-
 exports.createBarber = catchAsyncErrors(async(req, res, next) => {
     let images = []
 
@@ -109,9 +80,6 @@ exports.createBarber = catchAsyncErrors(async(req, res, next) => {
     }
 
     req.body.images = imagesLinks
-
-    // req.body.user = req.user.id // we get id from the user which is loggedin
-
     const barber = await Barber.create(req.body)
 
     res.status(201).json({
@@ -120,7 +88,6 @@ exports.createBarber = catchAsyncErrors(async(req, res, next) => {
     })
 
 })
-
 
 // Get All Barbers (Admin)
 exports.getAdminBarbers = catchAsyncErrors(async(req, res, next) => {
@@ -131,7 +98,6 @@ exports.getAdminBarbers = catchAsyncErrors(async(req, res, next) => {
         barbers,
     })
 })
-
 
 // Update Barber
 exports.updateBarber = catchAsyncErrors(async(req, res, next) => {
@@ -147,7 +113,6 @@ exports.updateBarber = catchAsyncErrors(async(req, res, next) => {
             runValidators: true,
             useFindAndModify: false
         })
-        // sendToken(updatedBarber, 200, res);
     res.status(200).json({
         success: true,
         updatedBarber
